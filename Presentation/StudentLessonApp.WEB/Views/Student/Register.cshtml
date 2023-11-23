@@ -1,0 +1,66 @@
+﻿
+@model RegisterStudentDto
+
+@{
+    ViewData["Title"] = "Sign Up Screen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title text-center">@ViewData["Title"]</h3>
+                    <hr />
+                    <form method="post">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="FullName" class="form-label"> Name Surname : </label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger small"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="UserName" class="form-label"> Username :</label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger small"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label"> Email : </label>
+                            <input asp-for="Email" class="form-control"/>
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Phone" class="form-label"> Phone : </label>
+                            <input asp-for="Phone" class="form-control"/>
+                            <span asp-validation-for="Phone" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label"> Password : </label>
+                            <input asp-for="Password" class="form-control" type="password" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="PasswordConfirm" class="form-label"> RePassword :</label>
+                            <input asp-for="PasswordConfirm" class="form-control" type="password" />
+                            <span asp-validation-for="PasswordConfirm" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group d-grid mb-3">
+                          
+                            <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-paper-plane me-2"></i>Sign Up</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
