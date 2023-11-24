@@ -19,7 +19,7 @@ namespace StudentLessonApp.Application.Features.Queries.Lesson.GetAllLesson
 
         public async Task<GetAllLessonQueryResponse> Handle(GetAllLessonQueryRequest request, CancellationToken cancellationToken)
         {
-            ICollection<LessonListDto>? lessons = await _lessonService.GetAllLessonAsync();
+            ICollection<LessonListDto>? lessons = await _lessonService.GetAllLessonFromRedisAsync();
 
             LessonListWithMessageDto lessonListWithMessageDto = new LessonListWithMessageDto();
             if (lessons is null)
