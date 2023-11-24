@@ -20,27 +20,27 @@ namespace StudentLessonApp.Persistence.Services
             _studentReadRepository = studentReadRepository;
             _studentWriteRepository = studentWriteRepository;
         }
-        public async Task<Student?> GetByUserNameAsync(string userName)
+        private async Task<Student?> _GetByUserNameAsync(string userName)
         {
             return await _studentReadRepository.GetFirstAsync(student => student.UserName == userName);
         }
-        public async Task<Student?> GetByEmailAsync(string email)
+        private async Task<Student?> _GetByEmailAsync(string email)
         {
             return await _studentReadRepository.GetFirstAsync(student => student.Email == email);
         }
-        public async Task<Student?> GetByPhoneAsync(string phone)
+        private async Task<Student?> _GetByPhoneAsync(string phone)
         {
             return await _studentReadRepository.GetFirstAsync(student => student.Phone == phone);
         }
         private async Task _CheckDuplicateStudentAsync(RegisterStudentDto registerStudentDto)
         {
-            var studentDuplicateName = await GetByUserNameAsync(registerStudentDto.UserName);
+            var studentDuplicateName = await _GetByUserNameAsync(registerStudentDto.UserName);
             if (studentDuplicateName is not null)
                 throw new ExistStudentUserNameException();
-            var studentDuplicateEmail = await GetByEmailAsync(registerStudentDto.Email);
+            var studentDuplicateEmail = await _GetByEmailAsync(registerStudentDto.Email);
             if (studentDuplicateEmail is not null)
                 throw new ExistStudentEmailException();
-            var studentDuplicatePhone = await GetByPhoneAsync(registerStudentDto.Phone);
+            var studentDuplicatePhone = await _GetByPhoneAsync(registerStudentDto.Phone);
             if (studentDuplicatePhone is not null)
                 throw new ExistStudentPhoneException();
         }
@@ -79,7 +79,7 @@ namespace StudentLessonApp.Persistence.Services
         public async Task<LoginResponseDto?> CheckLoginAsync(LoginStudentDto loginStudentDto)
         {
             LoginResponseDto loginResponseDto = new LoginResponseDto();
-            Student student=await GetByUserNameAsync(loginStudentDto.UserName);
+            Student student=await _GetByUserNameAsync(loginStudentDto.UserName);
             if(student is null)
             {
                 loginResponseDto.Success = false;

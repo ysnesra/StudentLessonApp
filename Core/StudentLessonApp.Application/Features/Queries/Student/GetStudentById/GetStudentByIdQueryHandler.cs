@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using StudentLessonApp.Application.Abstractions.Services;
-using StudentLessonApp.Application.DTOs.Student;
 using System.Security.Claims;
 
 
@@ -25,9 +24,8 @@ namespace StudentLessonApp.Application.Features.Queries.Student.GetStudentById
         {
             Guid studentId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             
-            var student= await _studentService.GetByIdAsync(studentId);
-            var mappedStudent = _mapper.Map<ProfileInfoDto>(student); //buna gerek yok sanki
-            return new GetStudentByIdQueryResponse (mappedStudent);
+            var student= await _studentService.GetByIdAsync(studentId);       
+            return new GetStudentByIdQueryResponse (student);
         }
     }
 }

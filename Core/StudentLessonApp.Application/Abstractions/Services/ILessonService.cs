@@ -7,5 +7,6 @@ namespace StudentLessonApp.Application.Abstractions.Services
     {
         Task<ICollection<LessonListDto?>> GetAllLessonAsync();
         Task<ICollection<LessonListDto?>> GetAllLessonFromRedisAsync();
+        Task<LessonInfoDto> GetByIdAsync(Guid id, bool tracking = true);
     }
 }

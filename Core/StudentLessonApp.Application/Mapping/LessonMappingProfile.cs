@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StudentLessonApp.Application.DTOs.Lesson;
+using StudentLessonApp.Application.DTOs.Student;
 using StudentLessonApp.Domain.Entities;
 
 namespace StudentLessonApp.Application.Mapping
@@ -9,7 +10,9 @@ namespace StudentLessonApp.Application.Mapping
         public LessonMappingProfile()
         {
             CreateMap<Lesson, LessonListDto>();
-         //   CreateMap<List<Lesson>, List<LessonListDto>>();
+
+            CreateMap<Lesson, LessonInfoDto>();
+            CreateMap<Lesson, LessonDetailDto>();
         }
     }
 }

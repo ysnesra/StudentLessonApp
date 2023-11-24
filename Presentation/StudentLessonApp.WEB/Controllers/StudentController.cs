@@ -18,7 +18,7 @@ namespace StudentLessonApp.WEB.Controllers
     
         public IActionResult Profile()
         {
-            return View();  //aynı sayfaya dön
+            return View();  
         }
 
         [AllowAnonymous]
