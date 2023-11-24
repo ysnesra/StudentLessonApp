@@ -57,9 +57,23 @@ namespace StudentLessonApp.Persistence.Services
             return student;
         }
 
-        public async Task<Student?> GetByIdAsync(Guid id, bool tracking = true)
+        public async Task<ProfileInfoDto?> GetByIdAsync(Guid id, bool tracking = true)
         {
-            return await _studentReadRepository.GetByIdAsync(id, tracking);
+            ProfileInfoDto profileInfoDto = new ProfileInfoDto();
+            Student student= await _studentReadRepository.GetByIdAsync(id, tracking);
+            if(student is null)
+            {
+                profileInfoDto.Success = false;
+                profileInfoDto.Message = "Student information not found.";
+                return profileInfoDto;
+            }
+           
+            profileInfoDto.Success = true;
+            profileInfoDto.Message = "Student information displayed successfully.";
+            profileInfoDto.StudentInfoDto=_mapper.Map<StudentInfoDto>(student);
+
+            return profileInfoDto;
+            
         }
 
         public async Task<LoginResponseDto?> CheckLoginAsync(LoginStudentDto loginStudentDto)

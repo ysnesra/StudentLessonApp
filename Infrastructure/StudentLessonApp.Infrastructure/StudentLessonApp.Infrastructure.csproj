@@ -7,10 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Services\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="MediatR" Version="11.0.0" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -18,6 +14,11 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\StudentLessonApp.Application\StudentLessonApp.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Abstractions\Services\" />
+	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

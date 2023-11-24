@@ -1,0 +1,33 @@
+﻿
+@model GetStudentByIdQueryResponse
+
+@{
+    ViewData["Title"] = "MyInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="text-center mt-4">
+        <h1>Profile Information</h1>
+    </div>
+
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name Surname</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.ProfileInfo.StudentInfoDto.FullName</td>
+                <td>@Model.ProfileInfo.StudentInfoDto.UserName</td>
+                <td>@Model.ProfileInfo.StudentInfoDto.Email</td>
+                <td>@Model.ProfileInfo.StudentInfoDto.Phone</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

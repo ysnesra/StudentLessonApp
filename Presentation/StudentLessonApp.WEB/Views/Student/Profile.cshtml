@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Student Panel";   
+﻿
+@{
+    ViewData["Title"] = "Student Panel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,14 +16,16 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ">
             <li class="nav-item active">
-                <a class="nav-link text-dark" asp-controller="Student" asp-action="StudentInfoProfile"><i class="fa-solid fa-address-card"></i> Profile </a>
+                <a class="nav-link text-dark" asp-controller="Student" asp-action="MyInformation"><i class="fa-solid fa-address-card"></i> My Information </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link text-dark" asp-controller="StudentLesson" asp-action="LessonList"><i class="fa-solid fa-address-card"></i> Courses </a>
+                <a class="nav-link text-dark" asp-controller="StudentLesson" asp-action="LessonList"><i class="fa-solid fa-address-card"></i> My Courses </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link text-dark" asp-controller="StudentLesson" asp-action="AssignLesson"><i class="fa-solid fa-address-card"></i> Choose Course </a>
+                <a class="nav-link text-dark" asp-controller="Lesson" asp-action="AllLessons"><i class="fa-solid fa-address-card"></i> All Courses </a>
             </li>
         </ul>
     </div>
 </nav>
+
+

@@ -5,11 +5,10 @@ using System.Security.Claims;
 using MediatR;
 using StudentLessonApp.Infrastructure.Base;
 using StudentLessonApp.Application.Features.Commands.Student.LoginStudent;
-using StudentLessonApp.Application.Features.Commands.Student.RegisterStudent;
-using Microsoft.AspNetCore.Authorization;
+
 
 namespace StudentLessonApp.WEB.Controllers
-{   
+{
     public class AuthController : BaseController
     {
         public AuthController(IMediator mediator, IHttpContextAccessor httpContextAccessor) : base(mediator, httpContextAccessor)
@@ -35,14 +34,13 @@ namespace StudentLessonApp.WEB.Controllers
                     claims.Add(new Claim("UserName", response.LoginResponseDto.StudentDto.UserName));
                     claims.Add(new Claim("Email", response.LoginResponseDto.StudentDto.Email));
 
-
                     ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
-                   await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                    return RedirectToAction("ProfileStudent", "Student");
+                    return RedirectToAction("Profile", "Student");
                 }
                 else
                 {

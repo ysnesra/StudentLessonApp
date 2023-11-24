@@ -4,11 +4,11 @@ using StudentLessonApp.Persistence.Contexts;
 
 namespace StudentLessonApp.Persistence.Repositories
 {
-    public class StudentReadRepository : ReadRepository<Student>, IStudentReadRepository
+    public class LessonReadRepository : ReadRepository<Lesson>, ILessonReadRepository
     {
-        public StudentReadRepository(StudentLessonAppDbContext context) : base(context)
+        public LessonReadRepository(StudentLessonAppDbContext context) : base(context)
         {
-            
+
         }
     }
 }

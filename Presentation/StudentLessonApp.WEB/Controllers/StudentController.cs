@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentLessonApp.Application.Features.Commands.Student.RegisterStudent;
+using StudentLessonApp.Application.Features.Queries.Student.GetStudentById;
 using StudentLessonApp.Infrastructure.Base;
+
 
 namespace StudentLessonApp.WEB.Controllers
 {
@@ -14,12 +16,11 @@ namespace StudentLessonApp.WEB.Controllers
 
         }
     
-        public IActionResult ProfileStudent()
+        public IActionResult Profile()
         {
             return View();  //aynı sayfaya dön
         }
 
-        //ÜyeOl Ekranı formu
         [AllowAnonymous]
         public IActionResult Register()
         {
@@ -35,19 +36,23 @@ namespace StudentLessonApp.WEB.Controllers
                 RegisterStudentCommandResponse response = await Mediator.Send(request);
 
                 if (response is not null)
-                    return RedirectToAction(nameof(ProfileStudent));
+                    return RedirectToAction(nameof(Profile));
                 else
-                    ModelState.AddModelError("", "Sign in failed");
+                    ModelState.AddModelError("", "Sign in success");
             }
             return View();
         }
 
-        //Student Bilgileri Id ye göre dolu gelme
         [HttpGet]
-        public IActionResult ProfileInfo()
+        public async Task<IActionResult> MyInformation(GetStudentByIdQueryRequest request)
         {
-            //ProfileInfoLoader();
-            return View();
+            GetStudentByIdQueryResponse response = await Mediator.Send(request);
+
+            if (response.ProfileInfo.Success)
+            {
+                return View(response);
+            }
+            return View(response);
         }
     }
 }

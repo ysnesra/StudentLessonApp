@@ -1,11 +1,10 @@
 ﻿
-
 namespace StudentLessonApp.Application.DTOs.Student
 {
-    public class LoginResponseDto
+    public class ProfileInfoDto
     {
         public bool Success { get; set; }
         public string Message { get; set; }
-        public StudentDto StudentDto { get; set; }
+        public StudentInfoDto StudentInfoDto { get; set; }
     }
 }
