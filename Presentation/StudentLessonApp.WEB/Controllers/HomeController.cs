@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentLessonApp.WEB.Models;
 using System.Diagnostics;
 
 namespace StudentLessonApp.WEB.Controllers
 {
+   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,7 +20,8 @@ namespace StudentLessonApp.WEB.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        
+        public IActionResult AccessDenied()
         {
             return View();
         }

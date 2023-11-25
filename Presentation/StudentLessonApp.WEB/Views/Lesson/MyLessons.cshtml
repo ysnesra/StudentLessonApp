@@ -1,0 +1,36 @@
+﻿@model GetLessonsByStudentIdQueryResponse
+
+@{
+    ViewData["Title"] = "MyLessons";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="text-center mt-4">
+        <h1>My Lessons</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-bordered table-striped mt-4 table-responsive">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course Name </th>
+                        <th>Description </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lesson in Model.LessonBelongStudentInfoDto.LessonsBelongStudentDto)
+                    {
+                        <tr>
+                            <td>@lesson.Name</td>
+                            <td>@lesson.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

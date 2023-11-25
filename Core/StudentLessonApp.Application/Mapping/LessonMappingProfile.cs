@@ -12,7 +12,9 @@ namespace StudentLessonApp.Application.Mapping
             CreateMap<Lesson, LessonListDto>();
 
             CreateMap<Lesson, LessonInfoDto>();
-            CreateMap<Lesson, LessonDetailDto>();
+            CreateMap<Lesson, LessonDetailDto>(); 
+
+            CreateMap<Lesson, LessonsBelongStudentDto>(); 
         }
     }
 }

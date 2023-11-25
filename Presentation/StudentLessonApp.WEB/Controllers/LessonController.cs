@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentLessonApp.Application.Features.Queries.Lesson.GetAllLesson;
+using StudentLessonApp.Application.Features.Queries.Lesson.GetLessonsByStudentId;
 using StudentLessonApp.Infrastructure.Base;
 
 namespace StudentLessonApp.WEB.Controllers
@@ -21,7 +22,19 @@ namespace StudentLessonApp.WEB.Controllers
 
             if (!response.LessonListWithMessageDtos.Success)
             {
-                return View(response);
+                return View(response.LessonListWithMessageDtos.Message);
+            }
+            return View(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyLessons(GetLessonsByStudentIdQueryRequest request)
+        {
+            GetLessonsByStudentIdQueryResponse response = await Mediator.Send(request);
+
+            if (!response.LessonBelongStudentInfoDto.Success)
+            {
+                return View(response.LessonBelongStudentInfoDto.Message);
             }
             return View(response);
         }

@@ -2,10 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using StudentLessonApp.Application.Abstractions.Services;
 using StudentLessonApp.Application.DTOs.Lesson;
-using StudentLessonApp.Application.DTOs.Student;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Domain.Entities;
-using StudentLessonApp.Persistence.Repositories;
 
 
 namespace StudentLessonApp.Persistence.Services
@@ -28,7 +26,6 @@ namespace StudentLessonApp.Persistence.Services
             var lessons = await _lessonReadRepository.GetAll().ToListAsync();
 
             var lessonsDto = _mapper.Map<ICollection<LessonListDto>>(lessons);
-
             return lessonsDto;
         }
 
@@ -58,6 +55,13 @@ namespace StudentLessonApp.Persistence.Services
             lessonInfoDto.LessonDetailDto = _mapper.Map<LessonDetailDto>(lesson);
 
             return lessonInfoDto;
+        }
+        public async Task<ICollection<LessonsBelongStudentDto?>> GetLessonsByStudentIdAsync(Guid studentId)
+        {
+            var lessons = await _lessonReadRepository.GetWhere(lesson => lesson.Students.Any(s => s.Id == studentId)).ToListAsync();
+
+            var lessonsDto = _mapper.Map<ICollection<LessonsBelongStudentDto>>(lessons);
+            return lessonsDto;
         }
     }
 }

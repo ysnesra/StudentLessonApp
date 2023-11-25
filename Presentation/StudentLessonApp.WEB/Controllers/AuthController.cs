@@ -50,5 +50,11 @@ namespace StudentLessonApp.WEB.Controllers
             }
             return View(request);
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); 
+            return RedirectToAction(nameof(Login));
+        }
     }
 }

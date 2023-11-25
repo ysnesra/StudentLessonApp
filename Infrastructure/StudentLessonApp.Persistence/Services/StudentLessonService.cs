@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using StudentLessonApp.Application.Abstractions.Services;
+using StudentLessonApp.Application.DTOs.Lesson;
 using StudentLessonApp.Application.DTOs.StudentLesson;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Domain.Entities;
+using StudentLessonApp.Persistence.Repositories;
 
 namespace StudentLessonApp.Persistence.Services
 {
