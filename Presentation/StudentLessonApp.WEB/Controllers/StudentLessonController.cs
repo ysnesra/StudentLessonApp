@@ -28,6 +28,6 @@ namespace StudentLessonApp.WEB.Controllers
                 return View();
             }
             return View();
-        }  
+        }
     }
 }

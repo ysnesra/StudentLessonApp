@@ -25,29 +25,67 @@ namespace StudentLessonApp.Persistence.Services
             _mapper = mapper;
         }
 
-        public async Task SelectLessonByStudentAsync(Guid studentId, Guid lessonId)
+        //public async Task SelectLessonByStudentAsync(Guid studentId, Guid lessonId)
+        //{
+        //    SelectLessonByStudentDto studentLessonByStudentDto = new SelectLessonByStudentDto();
+        //    var existlesson = await _lessonService.GetByIdAsync(lessonId);
+        //    if (existlesson is null)
+        //    {
+        //        studentLessonByStudentDto.Success = false;
+        //        studentLessonByStudentDto.Message = "This lesson does not exist in the system.";            
+        //    }
+              
+        //    var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
+        //    if (isLessonStudent is not null)
+        //    {
+        //        studentLessonByStudentDto.Success = false;
+        //        studentLessonByStudentDto.Message = "A student can choose to a Lesson only once.";              
+        //    }
+
+        //    StudentLesson studentLesson = new StudentLesson()
+        //    {
+        //        StudentId = studentId,
+        //        LessonId = lessonId
+        //    };
+        //    var studentLessonDb= await _studentLessonWriteRepository.AddAsync(studentLesson);        
+        //}
+
+        public async Task<SelectLessonByStudentDto> SelectLessonByStudentAsync(Guid studentId, ICollection<Guid> lessonIds)
         {
             SelectLessonByStudentDto studentLessonByStudentDto = new SelectLessonByStudentDto();
-            var existlesson = await _lessonService.GetByIdAsync(lessonId);
-            if (existlesson is null)
+
+            foreach (var lessonId in lessonIds)
             {
-                studentLessonByStudentDto.Success = false;
-                studentLessonByStudentDto.Message = "This lesson does not exist in the system.";            
-            }
-              
-            var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
-            if (isLessonStudent is not null)
-            {
-                studentLessonByStudentDto.Success = false;
-                studentLessonByStudentDto.Message = "A student can choose to a Lesson only once.";              
+                var existlesson = await _lessonService.GetByIdAsync(lessonId);
+
+                if (existlesson is null)
+                {
+                    studentLessonByStudentDto.Success = false;
+                    studentLessonByStudentDto.Message = $"Lesson with ID {lessonId} does not exist in the system.";
+                    return studentLessonByStudentDto; 
+                }
+
+                var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
+
+                if (isLessonStudent is not null)
+                {
+                    studentLessonByStudentDto.Success = false;
+                    studentLessonByStudentDto.Message = $"Student has already chosen Lesson with ID {lessonId}.";
+                    return studentLessonByStudentDto; 
+                }
+
+                StudentLesson studentLesson = new StudentLesson()
+                {
+                    StudentId = studentId,
+                    LessonId = lessonId
+                };
+
+                await _studentLessonWriteRepository.AddAsync(studentLesson);
             }
 
-            StudentLesson studentLesson = new StudentLesson()
-            {
-                StudentId = studentId,
-                LessonId = lessonId
-            };
-            var studentLessonDb= await _studentLessonWriteRepository.AddAsync(studentLesson);        
+            studentLessonByStudentDto.Success = true;
+            studentLessonByStudentDto.Message = "Lessons selected successfully.";
+            return studentLessonByStudentDto;
         }
     }
 }

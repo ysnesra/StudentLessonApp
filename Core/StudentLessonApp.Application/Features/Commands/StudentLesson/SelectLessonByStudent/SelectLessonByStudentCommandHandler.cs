@@ -24,16 +24,12 @@ namespace StudentLessonApp.Application.Features.Commands.StudentLesson.SelectLes
         public async Task<SelectLessonByStudentCommandResponse> Handle(SelectLessonByStudentCommandRequest request, CancellationToken cancellationToken)
         {
             Guid studentId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            await _studentLessonService.SelectLessonByStudentAsync(studentId, request.LessonId);
+            await _studentLessonService.SelectLessonByStudentAsync(studentId, request.LessonIds);
 
-            //var mappedLessonId = _mapper.Map<StudentLessonResponseDto>(request.LessonId);
-
-            StudentLessonResponseDto studentLessonResponseDto = new StudentLessonResponseDto();
-            studentLessonResponseDto.StudentLessonsDto.StudentId=studentId;
-            studentLessonResponseDto.StudentLessonsDto.LessonId=request.LessonId;
+            var studentLessonResponseDto = _mapper.Map<StudentLessonResponseDto>(request);
+            studentLessonResponseDto.StudentLessonsDto.StudentId = studentId;
 
             return new SelectLessonByStudentCommandResponse(studentLessonResponseDto);
-
         }
     }
 }

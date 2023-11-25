@@ -5,42 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="container">
-    <div class="text-center mt-4">
-        <h1>Choose Lesson</h1>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-
-            <table class="table table-bordered table-striped mt-4 table-responsive">
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                        <th>Course Name </th>
-                        <th>Description </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var lesson in Model.LessonListWithMessageDtos.LessonListDto)
-                    {
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Choose Lesson</h5>
+        <form asp-action="SelectLessonsAsync" asp-controller="StudentLesson" data-val="true" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped mt-4 table-responsive">
+                    <thead class="thead-dark">
                         <tr>
-                            <td><input id="@lesson.Id" type="checkbox" /></td>
-                            <td>@lesson.Name</td>
-                            <td>@lesson.Description</td>
+                            <th></th>
+                            <th>Course Name </th>
+                            <th>Description </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var lesson in Model.LessonListWithMessageDtos.LessonListDto)
+                        {
+                            <tr>
+                                <td><input id="@lesson.Id" type="checkbox" name="selectedLessons" value="@lesson.Id" /></td>
+                                <td>@lesson.Name</td>
+                                <td>@lesson.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+            </div>
+        </form>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-success pull-right"> Save </button>
-
-        </div>
-    </div>
-
 </div>
