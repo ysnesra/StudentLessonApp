@@ -40,7 +40,7 @@ namespace StudentLessonApp.WEB.Controllers
                 else
                     ModelState.AddModelError("", "Sign in success");
             }
-            return View();
+            return RedirectToAction("Login", "Auth");
         }
 
         [HttpGet]

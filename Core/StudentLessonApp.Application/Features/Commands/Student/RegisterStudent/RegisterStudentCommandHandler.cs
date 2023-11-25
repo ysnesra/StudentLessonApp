@@ -20,7 +20,7 @@ namespace StudentLessonApp.Application.Features.Commands.Student.RegisterStudent
         {
             var studentDto = _mapper.Map<RegisterStudentDto>(request);
             var student=await _studentService.RegisterAsync(studentDto);
-            return new(student.Id);
+            return new(student);
         }
     }
 }

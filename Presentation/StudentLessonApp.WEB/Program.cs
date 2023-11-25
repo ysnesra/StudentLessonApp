@@ -20,7 +20,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         opts.Cookie.Name = ".StudentLessonApp.auth";  
         opts.ExpireTimeSpan = TimeSpan.FromDays(20);    
-        opts.LoginPath = "/Auth/LoginAsync";  
+        opts.LoginPath = "/Auth/Login";  
         opts.LogoutPath = "/Auth/Logout";  
         opts.AccessDeniedPath = "/Home/AccessDenied";   
     });

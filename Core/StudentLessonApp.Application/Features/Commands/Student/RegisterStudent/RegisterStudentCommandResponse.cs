@@ -1,16 +1,16 @@
-﻿using StudentLessonApp.Application.Features.Commands.Response;
+﻿using StudentLessonApp.Application.DTOs.Student;
 
 
 namespace StudentLessonApp.Application.Features.Commands.Student.RegisterStudent
 {
-    public class RegisterStudentCommandResponse : BaseResponse
+    public class RegisterStudentCommandResponse 
     {
-        public Guid StudentId { get; set; }
+        public RegiterResponseDto RegiterResponseDto { get; set; }
 
-        public RegisterStudentCommandResponse(Guid studentId)
+        public RegisterStudentCommandResponse(RegiterResponseDto regiterResponseDto)
         {
-            StudentId = studentId;
-            Message = $"The student with ID {studentId} has been successfully registered in.";
+            RegiterResponseDto = regiterResponseDto;
+
         }
     }
 }

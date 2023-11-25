@@ -6,7 +6,7 @@ namespace StudentLessonApp.Application.Abstractions.Services
 {
     public interface IStudentService
     {
-        Task<Student> RegisterAsync(RegisterStudentDto registerStudentDto);
+        Task<RegiterResponseDto> RegisterAsync(RegisterStudentDto registerStudentDto);
         //Task<Student> UpdateAsync(UpdateStudentCommandRequest request);
         //Task RemoveAsync(Guid id);
         Task<ProfileInfoDto?> GetByIdAsync(Guid id, bool tracking = true);
