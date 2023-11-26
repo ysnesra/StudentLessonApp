@@ -72,8 +72,7 @@ Profile sayfasında;
 *****
 _Docker üzerinden oluşturuduğum Redis localhost'da 6380 portunda çalışıyor:_
 
-|![7Docker](https://github.com/ysnesra/StudentLessonApp/assets/104023688/02c8eca6-17fa-496f-b82b-5014d95920f8)
-  | ![6Redis](https://github.com/ysnesra/StudentLessonApp/assets/104023688/290e49bf-f2f5-469e-9dfa-912a0633ad94)|
+|![7Docker](https://github.com/ysnesra/StudentLessonApp/assets/104023688/02c8eca6-17fa-496f-b82b-5014d95920f8)  |![6Redis](https://github.com/ysnesra/StudentLessonApp/assets/104023688/290e49bf-f2f5-469e-9dfa-912a0633ad94) |
 |--|--|
 |  |  |
 
