@@ -32,7 +32,10 @@ Profile sayfasında;
 -   _MyCourses butonu ile seçtiği ders listesini görebilir._
 -   _AllCourses butonu ile tüm ders listesinden istediği dersleri seçerek kaydedebilir._
 
+
+
 *****
+
 
  _Anasayfa:_ 
 
@@ -64,5 +67,14 @@ Profile sayfasında;
 
  ![5AllCourse](https://github.com/ysnesra/StudentLessonApp/assets/104023688/d08db10f-d03d-4ab7-96c7-16cf4b49a95d)
 
+
+
+*****
+_Docker üzerinden oluşturuduğum Redis localhost'da 6380 portunda çalışıyor:_
+
+|![7Docker](https://github.com/ysnesra/StudentLessonApp/assets/104023688/02c8eca6-17fa-496f-b82b-5014d95920f8)
+  | ![6Redis](https://github.com/ysnesra/StudentLessonApp/assets/104023688/290e49bf-f2f5-469e-9dfa-912a0633ad94)|
+|--|--|
+|  |  |
 
 
