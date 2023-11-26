@@ -27,11 +27,13 @@ Profile sayfasında;
 -   _MyCourses butonu ile seçtiği ders listesini görebilir._
 -   _AllCourses butonu ile tüm ders listesinden istediği dersleri seçerek kaydedebilir._
 
+*****
 
  _Anasayfa:_ 
 
 ![1HomePage](https://github.com/ysnesra/StudentLessonApp/assets/104023688/bf244d66-62b4-4b76-818c-2d23575b1de0)
 
+*****
 
  _Register-Login İşlemleri:_ 
 
@@ -39,17 +41,20 @@ Profile sayfasında;
 |--|--|
 |  |  |
 
+*****
 
  _Authorize olduktan sonra Öğrencinin Profile Sayfası:_ 
 
 ![3StudentPanel](https://github.com/ysnesra/StudentLessonApp/assets/104023688/c59bf5ba-78fe-407e-b809-4c8cc5258ef0)
 
+*****
 
  _My Information:_ _Öğrencinin Kişisel Bilgilerini görüntülendiği Sayfa_ 
  
  ![4MyInformation](https://github.com/ysnesra/StudentLessonApp/assets/104023688/ba3b1426-b957-444a-a4c5-4723bed6058a)
 
- 
+*****
+
  _All Courses:_ _Tüm Deslerin görüntülendiği Sayfa_ 
 
  ![5AllCourse](https://github.com/ysnesra/StudentLessonApp/assets/104023688/7a369616-4362-4bc6-bb37-43dd8e2932f7)
