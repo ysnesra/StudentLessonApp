@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudentLessonApp.Persistence.Contexts;
@@ -11,9 +12,11 @@ using StudentLessonApp.Persistence.Contexts;
 namespace StudentLessonApp.Persistence.Migrations
 {
     [DbContext(typeof(StudentLessonAppDbContext))]
-    partial class StudentLessonAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231126130340_deleteLessonStudent")]
+    partial class deleteLessonStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

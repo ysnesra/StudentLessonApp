@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using StudentLessonApp.Application.Abstractions.Services;
 using StudentLessonApp.Application.DTOs.Lesson;
 using StudentLessonApp.Application.DTOs.StudentLesson;
@@ -13,45 +14,23 @@ namespace StudentLessonApp.Persistence.Services
     {
         private readonly IStudentLessonReadRepository _studentLessonReadRepository;
         private readonly IStudentLessonWriteRepository _studentLessonWriteRepository;
+        private readonly ILessonReadRepository _lessonReadRepository;
         private readonly IStudentService _studentService;
         private readonly ILessonService _lessonService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public StudentLessonService(IStudentLessonReadRepository studentLessonReadRepository, IStudentLessonWriteRepository studentLessonWriteRepository, IStudentService studentService, ILessonService lessonService, IMapper mapper, IUnitOfWork unitOfWork)
+        public StudentLessonService(IStudentLessonReadRepository studentLessonReadRepository, IStudentLessonWriteRepository studentLessonWriteRepository, ILessonReadRepository lessonReadRepository, IStudentService studentService, ILessonService lessonService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _studentLessonReadRepository = studentLessonReadRepository;
             _studentLessonWriteRepository = studentLessonWriteRepository;
+            _lessonReadRepository = lessonReadRepository;
             _studentService = studentService;
             _lessonService = lessonService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
-        //public async Task SelectLessonByStudentAsync(Guid studentId, Guid lessonId)
-        //{
-        //    SelectLessonByStudentDto studentLessonByStudentDto = new SelectLessonByStudentDto();
-        //    var existlesson = await _lessonService.GetByIdAsync(lessonId);
-        //    if (existlesson is null)
-        //    {
-        //        studentLessonByStudentDto.Success = false;
-        //        studentLessonByStudentDto.Message = "This lesson does not exist in the system.";            
-        //    }
-
-        //    var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
-        //    if (isLessonStudent is not null)
-        //    {
-        //        studentLessonByStudentDto.Success = false;
-        //        studentLessonByStudentDto.Message = "A student can choose to a Lesson only once.";              
-        //    }
-
-        //    StudentLesson studentLesson = new StudentLesson()
-        //    {
-        //        StudentId = studentId,
-        //        LessonId = lessonId
-        //    };
-        //    var studentLessonDb= await _studentLessonWriteRepository.AddAsync(studentLesson);        
-        //}
 
         public async Task<SelectLessonByStudentDto> SelectLessonByStudentAsync(Guid studentId, List<Guid> lessonIds)
         {
@@ -105,5 +84,39 @@ namespace StudentLessonApp.Persistence.Services
             studentLessonByStudentDto.StudentLessonsDto = studentLessonDtos;
             return studentLessonByStudentDto;
         }
+
+        public async Task<List<LessonsBelongStudentDto?>> GetLessonsByStudentIdAsync(Guid studentId)
+        {
+            var lessons = await _studentLessonReadRepository.GetWhere(x => x.StudentId == studentId).ToListAsync();
+            List<Lesson> lessonInfos = new List<Lesson>();
+
+            foreach (var lesson in lessons)
+            {
+                var lessonInfo = await _lessonReadRepository.GetByIdAsync(lesson.LessonId); ; ;
+                lessonInfos.Add(lessonInfo);
+            }
+
+            var lessonsDto = _mapper.Map<List<LessonsBelongStudentDto>>(lessonInfos);
+            return lessonsDto;
+
+        }
+
+
+
+        //public async Task<List<LessonsBelongStudentDto?>> GetLessonsByStudentIdAsync(Guid studentId)
+        //{
+        //    var lessons = await _studentLessonReadRepository.GetWhere(x=>x.StudentId==studentId).ToListAsync();
+        //    List<Lesson> lessonInfos = new List<Lesson>();
+
+        //    foreach (var lesson in lessons)
+        //    {
+        //      var lessonInfo=await _lessonReadRepository.GetFirstAsync(x => x.Id == lesson.Id);
+        //      lessonInfos.Add(lessonInfo);
+        //    }
+
+        //    var lessonsDto = _mapper.Map<List<LessonsBelongStudentDto>>(lessonInfos);
+        //    return lessonsDto;
+
+        //}
     }
 }

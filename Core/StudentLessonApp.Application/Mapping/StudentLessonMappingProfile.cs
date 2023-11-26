@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StudentLessonApp.Application.DTOs.Lesson;
 using StudentLessonApp.Application.DTOs.StudentLesson;
 using StudentLessonApp.Domain.Entities;
 
@@ -9,9 +10,6 @@ namespace StudentLessonApp.Application.Mapping
     {
         public StudentLessonMappingProfile()
         {
-            //CreateMap<StudentLessonResponseDto, SelectLessonByStudentDto>()
-            //  .ForMember(dest => dest.StudentLessonsDto, opt => opt.MapFrom(src => src.StudentLessonsDto))
-            //  .ReverseMap();
             CreateMap<StudentLessonResponseDto, SelectLessonByStudentDto>()
            .ForMember(dest => dest.StudentLessonsDto, opt => opt.MapFrom(src => src.StudentLessonsDto ?? new List<StudentLessonsDto>()))
            .ReverseMap();
@@ -19,6 +17,8 @@ namespace StudentLessonApp.Application.Mapping
             CreateMap<StudentLessonsDto, StudentLessonResponseDto>();
 
             CreateMap<StudentLessonsDto, StudentLesson>();
+
+            CreateMap<LessonsBelongStudentDto, Lesson>();
             
         }
     }

@@ -3,7 +3,7 @@ using StudentLessonApp.Application;
 using StudentLessonApp.Infrastructure;
 using StudentLessonApp.Redis;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using StudentLessonApp.DistributedCache;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

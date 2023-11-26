@@ -10,13 +10,13 @@ namespace StudentLessonApp.Application.Features.Queries.Lesson.GetLessonsByStude
 {
     public class GetLessonsByStudentIdQueryHandler : IRequestHandler<GetLessonsByStudentIdQueryRequest, GetLessonsByStudentIdQueryResponse>
     {
-        private readonly ILessonService _lessonService;
+        private readonly IStudentLessonService _studentlessonService;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public GetLessonsByStudentIdQueryHandler(ILessonService lessonService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public GetLessonsByStudentIdQueryHandler(IStudentLessonService studentlessonService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
-            _lessonService = lessonService;
+            _studentlessonService = studentlessonService;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -24,7 +24,7 @@ namespace StudentLessonApp.Application.Features.Queries.Lesson.GetLessonsByStude
         public async Task<GetLessonsByStudentIdQueryResponse> Handle(GetLessonsByStudentIdQueryRequest request, CancellationToken cancellationToken)
         {
             Guid studentId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            ICollection<LessonsBelongStudentDto?> lessons = await _lessonService.GetLessonsByStudentIdAsync(studentId);
+            List<LessonsBelongStudentDto?> lessons = await _studentlessonService.GetLessonsByStudentIdAsync(studentId);
 
             LessonBelongStudentInfoDto lessonBelongStudentInfoDto = new LessonBelongStudentInfoDto();
             if (lessons is null)

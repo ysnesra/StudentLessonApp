@@ -34,8 +34,7 @@ namespace StudentLessonApp.WEB.Controllers
             if (ModelState.IsValid)
             {
                 SelectLessonByStudentCommandRequest request = new SelectLessonByStudentCommandRequest();
-               // string[] Lessons = LessonId.Split('#');
-               
+                         
                 List<Guid> less = new List<Guid>();
              
                 foreach (var item in LessonId)

@@ -4,5 +4,6 @@ namespace StudentLessonApp.Application.Repositories
 {
     public interface IStudentLessonReadRepository : IReadRepository<StudentLesson>
     {
+       
     }
 }

@@ -4,40 +4,42 @@
     ViewData["Title"] = "AllLessons";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display4 border-bottom text-center pb-2">@ViewData["Title"]</h1>
+    </div>
+</div>
 
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Choose Lesson</h5>
 
-
-        <div class="col-md-12">
-            <table class="table table-bordered table-striped mt-4 table-responsive">
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                        <th>Course Name</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var lesson in Model.LessonListWithMessageDtos.LessonListDto)
-                    {
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped mt-4 table-responsive">
+                    <thead class="thead-dark">
                         <tr>
-
-                            <td id="Lesson">
-                                <input type="checkbox" class="myLessonsCheckbox" data-id="@lesson.Id" id="@lesson.Id" value="@lesson.Id" />
-                            </td>
-                            <td>@lesson.Name</td>
-                            <td>@lesson.Description</td>
+                            <th></th>
+                            <th>Course Name</th>
+                            <th>Description</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="form-group d-grid mb-3">
-            <a id="SaveAll"  class="btn btn-primary d-block"><i class="fa-solid fa-right-to-bracket me-2"></i>Save</a>
-        </div>
-
+                    </thead>
+                    <tbody>
+                        @foreach (var lesson in Model.LessonListWithMessageDtos.LessonListDto)
+                        {
+                            <tr>
+                                <td id="Lesson">
+                                    <input type="checkbox" class="myLessonsCheckbox" data-id="@lesson.Id" id="@lesson.Id" value="@lesson.Id" />
+                                </td>
+                                <td>@lesson.Name</td>
+                                <td>@lesson.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group d-grid mb-3">
+                <a id="SaveAll" class="btn btn-primary d-block"><i class="fa-solid fa-right-to-bracket me-2"></i>Save</a>
+            </div>
 
     </div>
 </div>
@@ -47,7 +49,7 @@
 
 @section Scripts {
 
-   <script type="text/javascript">
+    <script type="text/javascript">
 
         $("#SaveAll").click(function () {
 
@@ -62,17 +64,17 @@
                 url: "/Lesson/SaveAllLessons",
                 data: JSON.stringify(values),
                 contentType: 'application/json; charset=utf-8',
-               
+
                 success: function (result) {
-                  
+
                     console.log(result);
-                   
-                    
-                        alert("kayıt tamamlandı");
-                        window.location.href = "/Lesson/MyLessons";
-                    
-                   // alert(result)
-                   // window.location.reload();
+
+
+                    alert("kayıt tamamlandı");
+                    window.location.href = "/Lesson/MyLessons";
+
+                    // alert(result)
+                    // window.location.reload();
                 },
                 error: function (ex) {
                     console.log(ex);

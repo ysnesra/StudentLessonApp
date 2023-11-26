@@ -1,8 +1,11 @@
 ﻿
 
+using MediatR;
+
+
 namespace StudentLessonApp.Application.Abstractions.Services
 {
-    public interface ICacheableRequest
+    public interface ICacheableRequest<TResponse> : IRequest<TResponse>
     {
         bool BypassCache { get; }
         string CacheKey { get; }

@@ -14,6 +14,9 @@ namespace StudentLessonApp.Application
             services.AddMediatR(typeof(ServiceRegistration));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkBehavior<,>));
 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>)); 
+            
+
             var assembly = Assembly.GetExecutingAssembly();
             var types = assembly.GetTypes();
             var mappingProfiles = types.Where(type => type.IsAssignableTo(typeof(Profile)));
