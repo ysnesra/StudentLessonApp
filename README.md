@@ -15,8 +15,13 @@ Veritabanı işlemlerini soyutlama ve modülerleştirme için Repository Design 
 
 Repository Pattern ile birlikte Dependency Injection kullanmak, bağımlılıkların yönetimini kolaylaştırır ve kodun daha esnek hale gelmesini sağlar.
 
+AutoMapper kütüphanesi kullanılırak farklı veri modeli arasında dönüşüm performanslı hale getirildi.
 
+
+*****
 *-İlk olarak Öğrenci uygulamaya Register butonuyla kayıt olmalıdır.
+
+  Register ve Login olurken girilen değerlerin geçerli olup olmadığını kontrol etmek için FluentValidation kütüphanesi kullanılmıştır.
 
 *-Üye olduktan sonra Login ekranında  Username ve Password bilgilerini girerek sisteme giriş yapabilir.Login olurken bilgileri Cookie de tutulur.
 
@@ -57,6 +62,7 @@ Profile sayfasında;
 
  _All Courses:_ _Tüm Deslerin görüntülendiği Sayfa_ 
 
- ![5AllCourse](https://github.com/ysnesra/StudentLessonApp/assets/104023688/7a369616-4362-4bc6-bb37-43dd8e2932f7)
+ ![5AllCourse](https://github.com/ysnesra/StudentLessonApp/assets/104023688/d08db10f-d03d-4ab7-96c7-16cf4b49a95d)
+
 
 
