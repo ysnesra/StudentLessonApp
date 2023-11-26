@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentLessonApp.WEB", "Pre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentLessonApp.Redis", "Infrastructure\StudentLessonApp.Redis\StudentLessonApp.Redis.csproj", "{A8D4CE0C-9760-40C9-BF3F-DEEA5DB99CF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentLessonApp.DistributedCache", "Infrastructure\StudentLessonApp.DistributedCache\StudentLessonApp.DistributedCache.csproj", "{8358E008-694D-4E53-8F1D-0600546FD04E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A8D4CE0C-9760-40C9-BF3F-DEEA5DB99CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8D4CE0C-9760-40C9-BF3F-DEEA5DB99CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8D4CE0C-9760-40C9-BF3F-DEEA5DB99CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8358E008-694D-4E53-8F1D-0600546FD04E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8358E008-694D-4E53-8F1D-0600546FD04E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8358E008-694D-4E53-8F1D-0600546FD04E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8358E008-694D-4E53-8F1D-0600546FD04E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{75A9CF97-2340-41C5-BB5E-9F1685BD4ABA} = {9798EE98-CF77-4CA8-9DBA-AB7A4DD8AD89}
 		{DECD7779-79E1-43E3-B953-9B861BB4E0F8} = {9C48F6EB-71DD-4E2D-95EF-F1C2F8E7A8A2}
 		{A8D4CE0C-9760-40C9-BF3F-DEEA5DB99CF3} = {9798EE98-CF77-4CA8-9DBA-AB7A4DD8AD89}
+		{8358E008-694D-4E53-8F1D-0600546FD04E} = {9798EE98-CF77-4CA8-9DBA-AB7A4DD8AD89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F3C32E0E-AF85-4967-91FB-5E7642A60D30}

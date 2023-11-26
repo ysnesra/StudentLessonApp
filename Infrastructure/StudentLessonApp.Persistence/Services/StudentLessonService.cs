@@ -4,6 +4,7 @@ using StudentLessonApp.Application.DTOs.Lesson;
 using StudentLessonApp.Application.DTOs.StudentLesson;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Domain.Entities;
+using StudentLessonApp.Persistence.Migrations;
 using StudentLessonApp.Persistence.Repositories;
 
 namespace StudentLessonApp.Persistence.Services
@@ -15,14 +16,16 @@ namespace StudentLessonApp.Persistence.Services
         private readonly IStudentService _studentService;
         private readonly ILessonService _lessonService;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StudentLessonService(IStudentLessonReadRepository studentLessonReadRepository, IStudentLessonWriteRepository studentLessonWriteRepository, IStudentService studentService, ILessonService lessonService, IMapper mapper)
+        public StudentLessonService(IStudentLessonReadRepository studentLessonReadRepository, IStudentLessonWriteRepository studentLessonWriteRepository, IStudentService studentService, ILessonService lessonService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _studentLessonReadRepository = studentLessonReadRepository;
             _studentLessonWriteRepository = studentLessonWriteRepository;
             _studentService = studentService;
             _lessonService = lessonService;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         //public async Task SelectLessonByStudentAsync(Guid studentId, Guid lessonId)
@@ -34,7 +37,7 @@ namespace StudentLessonApp.Persistence.Services
         //        studentLessonByStudentDto.Success = false;
         //        studentLessonByStudentDto.Message = "This lesson does not exist in the system.";            
         //    }
-              
+
         //    var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
         //    if (isLessonStudent is not null)
         //    {
@@ -50,9 +53,10 @@ namespace StudentLessonApp.Persistence.Services
         //    var studentLessonDb= await _studentLessonWriteRepository.AddAsync(studentLesson);        
         //}
 
-        public async Task<SelectLessonByStudentDto> SelectLessonByStudentAsync(Guid studentId, ICollection<Guid> lessonIds)
+        public async Task<SelectLessonByStudentDto> SelectLessonByStudentAsync(Guid studentId, List<Guid> lessonIds)
         {
             SelectLessonByStudentDto studentLessonByStudentDto = new SelectLessonByStudentDto();
+            List<StudentLessonsDto> studentLessonDtos = new List<StudentLessonsDto>();
 
             foreach (var lessonId in lessonIds)
             {
@@ -65,26 +69,40 @@ namespace StudentLessonApp.Persistence.Services
                     return studentLessonByStudentDto; 
                 }
 
-                var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
+               // var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
 
-                if (isLessonStudent is not null)
-                {
-                    studentLessonByStudentDto.Success = false;
-                    studentLessonByStudentDto.Message = $"Student has already chosen Lesson with ID {lessonId}.";
-                    return studentLessonByStudentDto; 
-                }
+                //if (isLessonStudent is not null)
+                //{
+                //    studentLessonByStudentDto.Success = false;
+                //    studentLessonByStudentDto.Message = $"Student has already chosen Lesson with ID {lessonId}.";
+                //    return studentLessonByStudentDto; 
+                //}
 
                 StudentLesson studentLesson = new StudentLesson()
                 {
+                    Id = Guid.NewGuid(),
                     StudentId = studentId,
                     LessonId = lessonId
                 };
+                
 
                 await _studentLessonWriteRepository.AddAsync(studentLesson);
+
+                var mappedStudentLesson = new StudentLessonsDto
+                {
+                    Id = studentLesson.Id,
+                    StudentId = studentLesson.StudentId,
+                    LessonId = studentLesson.LessonId
+                };
+
+                studentLessonDtos.Add(mappedStudentLesson);
+
             }
+       
 
             studentLessonByStudentDto.Success = true;
             studentLessonByStudentDto.Message = "Lessons selected successfully.";
+            studentLessonByStudentDto.StudentLessonsDto = studentLessonDtos;
             return studentLessonByStudentDto;
         }
     }

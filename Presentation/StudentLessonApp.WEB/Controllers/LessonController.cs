@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentLessonApp.Application.Features.Commands.StudentLesson.SelectLessonByStudent;
 using StudentLessonApp.Application.Features.Queries.Lesson.GetAllLesson;
 using StudentLessonApp.Application.Features.Queries.Lesson.GetLessonsByStudentId;
 using StudentLessonApp.Infrastructure.Base;
@@ -25,6 +26,34 @@ namespace StudentLessonApp.WEB.Controllers
                 return View(response.LessonListWithMessageDtos.Message);
             }
             return View(response);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SaveAllLessons([FromBody]string[] LessonId)
+        {
+            if (ModelState.IsValid)
+            {
+                SelectLessonByStudentCommandRequest request = new SelectLessonByStudentCommandRequest();
+               // string[] Lessons = LessonId.Split('#');
+               
+                List<Guid> less = new List<Guid>();
+             
+                foreach (var item in LessonId)
+                {
+
+                    less.Add(Guid.Parse(item)); 
+                }
+
+                request.LessonIds = less;
+
+                SelectLessonByStudentCommandResponse response = await Mediator.Send(request);
+
+                if (response is not null)
+                    return Json("Ok");
+                else
+                    return Json("Fail");
+            }
+            return  Json("Fail");
         }
 
         [HttpGet]

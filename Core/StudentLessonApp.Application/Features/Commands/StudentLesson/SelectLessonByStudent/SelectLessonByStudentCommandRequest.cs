@@ -4,7 +4,7 @@ namespace StudentLessonApp.Application.Features.Commands.StudentLesson.SelectLes
 {
     public class SelectLessonByStudentCommandRequest : IRequest<SelectLessonByStudentCommandResponse>
     {
-        public ICollection<Guid> LessonIds { get; set; }
+        public List<Guid> LessonIds { get; set; }
 
     }
 }

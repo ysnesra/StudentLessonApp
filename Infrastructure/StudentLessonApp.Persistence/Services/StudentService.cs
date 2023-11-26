@@ -13,13 +13,16 @@ namespace StudentLessonApp.Persistence.Services
         private readonly IMapper _mapper;
         private readonly IStudentReadRepository _studentReadRepository;
         private readonly IStudentWriteRepository _studentWriteRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StudentService(IMapper mapper, IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository)
+        public StudentService(IMapper mapper, IStudentReadRepository studentReadRepository, IStudentWriteRepository studentWriteRepository, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _studentReadRepository = studentReadRepository;
             _studentWriteRepository = studentWriteRepository;
+            _unitOfWork = unitOfWork;
         }
+
         private async Task<Student?> _GetByUserNameAsync(string userName)
         {
             return await _studentReadRepository.GetFirstAsync(student => student.UserName == userName);

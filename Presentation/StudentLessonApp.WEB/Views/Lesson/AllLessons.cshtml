@@ -8,34 +8,79 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Choose Lesson</h5>
-        <form method="post">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
-            <div class="col-md-12">
-                <table class="table table-bordered table-striped mt-4 table-responsive">
-                    <thead class="thead-dark">
+
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped mt-4 table-responsive">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lesson in Model.LessonListWithMessageDtos.LessonListDto)
+                    {
                         <tr>
-                            <th></th>
-                            <th>Course Name </th>
-                            <th>Description </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var lesson in Model.LessonListWithMessageDtos.LessonListDto)
-                        {
-                            <tr>
-                                <td><input id="@lesson.Id" type="checkbox" name="selectedLessons" value="@lesson.Id" /></td>
-                                <td>@lesson.Name</td>
-                                <td>@lesson.Description</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-grid">
 
-                <button class="btn btn-primary" asp-action="SelectLessonsAsync" asp-controller="StudentLesson" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
-            </div>
-        </form>
+                            <td id="Lesson">
+                                <input type="checkbox" class="myLessonsCheckbox" data-id="@lesson.Id" id="@lesson.Id" value="@lesson.Id" />
+                            </td>
+                            <td>@lesson.Name</td>
+                            <td>@lesson.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group d-grid mb-3">
+            <a id="SaveAll"  class="btn btn-primary d-block"><i class="fa-solid fa-right-to-bracket me-2"></i>Save</a>
+        </div>
+
+
     </div>
 </div>
+
+
+<input id="SelectedLesson" type="hidden" />
+
+@section Scripts {
+
+   <script type="text/javascript">
+
+        $("#SaveAll").click(function () {
+
+            var values = $('input[type="checkbox"].myLessonsCheckbox:checked').map(function () {
+                return $(this).val();
+            }).toArray();
+
+            console.log(values)
+
+            $.ajax({
+                type: "POST",
+                url: "/Lesson/SaveAllLessons",
+                data: JSON.stringify(values),
+                contentType: 'application/json; charset=utf-8',
+               
+                success: function (result) {
+                  
+                    console.log(result);
+                   
+                    
+                        alert("kayıt tamamlandı");
+                        window.location.href = "/Lesson/MyLessons";
+                    
+                   // alert(result)
+                   // window.location.reload();
+                },
+                error: function (ex) {
+                    console.log(ex);
+                }
+            });
+
+        });
+
+    </script>
+}
+

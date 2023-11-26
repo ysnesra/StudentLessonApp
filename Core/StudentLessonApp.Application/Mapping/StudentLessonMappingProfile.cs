@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using StudentLessonApp.Application.DTOs.StudentLesson;
-using StudentLessonApp.Application.Features.Commands.StudentLesson.SelectLessonByStudent;
+using StudentLessonApp.Domain.Entities;
 
 
 namespace StudentLessonApp.Application.Mapping
@@ -9,11 +9,17 @@ namespace StudentLessonApp.Application.Mapping
     {
         public StudentLessonMappingProfile()
         {
-            CreateMap<SelectLessonByStudentCommandRequest, StudentLessonResponseDto>()
-           .ForMember(dest => dest.StudentLessonsDto, opt => opt.MapFrom(src => 
-                      new StudentLessonsDto { LessonId = src.LessonIds.FirstOrDefault() }))
-           .ForMember(dest => dest.Success, opt => opt.MapFrom(_ => true))
-           .ForMember(dest => dest.Message, opt => opt.MapFrom(_ => "Lessons selected successfully"));
+            //CreateMap<StudentLessonResponseDto, SelectLessonByStudentDto>()
+            //  .ForMember(dest => dest.StudentLessonsDto, opt => opt.MapFrom(src => src.StudentLessonsDto))
+            //  .ReverseMap();
+            CreateMap<StudentLessonResponseDto, SelectLessonByStudentDto>()
+           .ForMember(dest => dest.StudentLessonsDto, opt => opt.MapFrom(src => src.StudentLessonsDto ?? new List<StudentLessonsDto>()))
+           .ReverseMap();
+
+            CreateMap<StudentLessonsDto, StudentLessonResponseDto>();
+
+            CreateMap<StudentLessonsDto, StudentLesson>();
+            
         }
     }
 }

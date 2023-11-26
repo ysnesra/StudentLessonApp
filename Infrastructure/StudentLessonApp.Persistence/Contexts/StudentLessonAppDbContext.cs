@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using StudentLessonApp.Domain.Entities;
+using StudentLessonApp.Persistence.Migrations;
 
 
 namespace StudentLessonApp.Persistence.Contexts
@@ -15,6 +16,7 @@ namespace StudentLessonApp.Persistence.Contexts
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<StudentLesson> StudentLessons { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
