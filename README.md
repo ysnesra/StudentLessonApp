@@ -65,7 +65,18 @@ Profile sayfasında;
 
  _All Courses:_ _Tüm Deslerin görüntülendiği Sayfa_ 
 
- ![5AllCourse](https://github.com/ysnesra/StudentLessonApp/assets/104023688/d08db10f-d03d-4ab7-96c7-16cf4b49a95d)
+![kaydet](https://github.com/ysnesra/StudentLessonApp/assets/104023688/dd1149f4-ae07-4a47-b3f6-e0ea649f5509)
+
+*****
+
+Öğrenci Dersleri seçtikten sonra "My Lesson" sayfasına yönlendirilir.Seçtiği tüm dersleri görebilir.
+
+![12myLesson](https://github.com/ysnesra/StudentLessonApp/assets/104023688/05413ef1-9032-46f0-a32e-2d994be2c619)
+
+
+
+Seçtiği dersler eklenince ekran görüntüsü :
+![13Mylessonartı](https://github.com/ysnesra/StudentLessonApp/assets/104023688/cb5daea3-e9b7-4927-bd40-917e0d8b37a8)
 
 
 
