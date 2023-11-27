@@ -56,13 +56,6 @@ namespace StudentLessonApp.Persistence.Services
 
             return lessonInfoDto;
         }
-        //public async Task<ICollection<LessonsBelongStudentDto?>> GetLessonsByStudentIdAsync(Guid studentId)
-        //{
-        //    //var lessons = await _lessonReadRepository.GetWhere(lesson => lesson.Students.Any(s => s.Id == studentId)).ToListAsync();
-
-        //    //var lessonsDto = _mapper.Map<ICollection<LessonsBelongStudentDto>>(lessons);
-        //    //return lessonsDto;
-        //    return null;
-        //}
+       
     }
 }

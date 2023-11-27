@@ -29,30 +29,29 @@ namespace StudentLessonApp.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> SaveAllLessons([FromBody]string[] LessonId)
+        public async Task<JsonResult> SaveAllLessons([FromBody] string[] LessonId)
         {
             if (ModelState.IsValid)
             {
                 SelectLessonByStudentCommandRequest request = new SelectLessonByStudentCommandRequest();
-                         
+
                 List<Guid> less = new List<Guid>();
-             
+
                 foreach (var item in LessonId)
                 {
-
-                    less.Add(Guid.Parse(item)); 
+                    less.Add(Guid.Parse(item));
                 }
 
                 request.LessonIds = less;
 
                 SelectLessonByStudentCommandResponse response = await Mediator.Send(request);
 
-                if (response is not null)
+                if (response.StudentLessonResponseDto.Success)
                     return Json("Ok");
                 else
-                    return Json("Fail");
+                    return Json(new { error = response.StudentLessonResponseDto.Message });
             }
-            return  Json("Fail");
+            return Json(new { error = "Invalid model state" });
         }
 
         [HttpGet]

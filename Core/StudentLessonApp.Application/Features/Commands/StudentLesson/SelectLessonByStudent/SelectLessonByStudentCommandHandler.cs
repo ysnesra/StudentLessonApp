@@ -26,6 +26,7 @@ namespace StudentLessonApp.Application.Features.Commands.StudentLesson.SelectLes
             Guid studentId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             var res = await _studentLessonService.SelectLessonByStudentAsync(studentId, request.LessonIds);
 
+
             var studentLessonResponseDto = _mapper.Map<StudentLessonResponseDto>(res);
             
             return new SelectLessonByStudentCommandResponse(studentLessonResponseDto);

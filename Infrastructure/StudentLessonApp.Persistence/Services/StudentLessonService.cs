@@ -44,16 +44,16 @@ namespace StudentLessonApp.Persistence.Services
                 if (existlesson is null)
                 {
                     studentLessonByStudentDto.Success = false;
-                    studentLessonByStudentDto.Message = $"Lesson with ID {lessonId} does not exist in the system.";
+                    studentLessonByStudentDto.Message = $"Lesson with Nam {existlesson.LessonDetailDto.Name} does not exist in the system.";
                     return studentLessonByStudentDto; 
                 }
 
-                var isLessonStudent = await _studentLessonReadRepository.GetWhere(x => x.StudentId == studentId && x.LessonId == lessonId).ToListAsync();
+                var isLessonStudent = await _studentLessonReadRepository.GetWhere(x => x.StudentId == studentId && x.LessonId == lessonId).FirstOrDefaultAsync();
 
                 if (isLessonStudent is not null)
                 {
                     studentLessonByStudentDto.Success = false;
-                    studentLessonByStudentDto.Message = $"Student has already choosen Lesson with ID {lessonId}.";
+                    studentLessonByStudentDto.Message = $"Student has already choosen Lesson with Name {existlesson.LessonDetailDto.Name}.";                  
                     return studentLessonByStudentDto;
                 }
 

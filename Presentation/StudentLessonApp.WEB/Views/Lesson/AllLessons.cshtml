@@ -66,18 +66,16 @@
                 contentType: 'application/json; charset=utf-8',
 
                 success: function (result) {
-
-                    console.log(result);
-
-
-                    alert("kayıt tamamlandı");
-                    window.location.href = "/Lesson/MyLessons";
-
-                    // alert(result)
-                    // window.location.reload();
+                    if (result === "Ok") {
+                        alert("Course registration is completed");
+                        window.location.href = "/Lesson/MyLessons";
+                    } else {
+                        alert("Error: " + result.error);
+                    }
                 },
                 error: function (ex) {
                     console.log(ex);
+                    alert("An error occurred while processing the request.");
                 }
             });
 
@@ -85,4 +83,6 @@
 
     </script>
 }
+
+
 
