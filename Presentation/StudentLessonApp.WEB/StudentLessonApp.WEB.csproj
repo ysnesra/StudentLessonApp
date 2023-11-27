@@ -23,7 +23,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Infrastructure\StudentLessonApp.DistributedCache\StudentLessonApp.DistributedCache.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\StudentLessonApp.Infrastructure\StudentLessonApp.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\StudentLessonApp.Persistence\StudentLessonApp.Persistence.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\StudentLessonApp.Redis\StudentLessonApp.Redis.csproj" />

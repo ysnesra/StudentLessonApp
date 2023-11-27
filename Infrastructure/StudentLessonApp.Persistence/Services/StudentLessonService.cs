@@ -48,14 +48,14 @@ namespace StudentLessonApp.Persistence.Services
                     return studentLessonByStudentDto; 
                 }
 
-               // var isLessonStudent = await _studentLessonReadRepository.GetFirstAsync(x => x.StudentId == studentId && x.LessonId == lessonId);
+                var isLessonStudent = await _studentLessonReadRepository.GetWhere(x => x.StudentId == studentId && x.LessonId == lessonId).ToListAsync();
 
-                //if (isLessonStudent is not null)
-                //{
-                //    studentLessonByStudentDto.Success = false;
-                //    studentLessonByStudentDto.Message = $"Student has already chosen Lesson with ID {lessonId}.";
-                //    return studentLessonByStudentDto; 
-                //}
+                if (isLessonStudent is not null)
+                {
+                    studentLessonByStudentDto.Success = false;
+                    studentLessonByStudentDto.Message = $"Student has already choosen Lesson with ID {lessonId}.";
+                    return studentLessonByStudentDto;
+                }
 
                 StudentLesson studentLesson = new StudentLesson()
                 {
@@ -99,24 +99,6 @@ namespace StudentLessonApp.Persistence.Services
             var lessonsDto = _mapper.Map<List<LessonsBelongStudentDto>>(lessonInfos);
             return lessonsDto;
 
-        }
-
-
-
-        //public async Task<List<LessonsBelongStudentDto?>> GetLessonsByStudentIdAsync(Guid studentId)
-        //{
-        //    var lessons = await _studentLessonReadRepository.GetWhere(x=>x.StudentId==studentId).ToListAsync();
-        //    List<Lesson> lessonInfos = new List<Lesson>();
-
-        //    foreach (var lesson in lessons)
-        //    {
-        //      var lessonInfo=await _lessonReadRepository.GetFirstAsync(x => x.Id == lesson.Id);
-        //      lessonInfos.Add(lessonInfo);
-        //    }
-
-        //    var lessonsDto = _mapper.Map<List<LessonsBelongStudentDto>>(lessonInfos);
-        //    return lessonsDto;
-
-        //}
+        }     
     }
 }
