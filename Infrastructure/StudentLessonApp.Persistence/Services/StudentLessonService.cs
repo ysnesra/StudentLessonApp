@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using StudentLessonApp.Application.Abstractions.Services;
+using StudentLessonApp.Application.Constants;
 using StudentLessonApp.Application.DTOs.Lesson;
 using StudentLessonApp.Application.DTOs.StudentLesson;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Domain.Entities;
-using StudentLessonApp.Persistence.Migrations;
-using StudentLessonApp.Persistence.Repositories;
+
 
 namespace StudentLessonApp.Persistence.Services
 {
@@ -44,7 +44,7 @@ namespace StudentLessonApp.Persistence.Services
                 if (existlesson is null)
                 {
                     studentLessonByStudentDto.Success = false;
-                    studentLessonByStudentDto.Message = $"Lesson with Nam {existlesson.LessonDetailDto.Name} does not exist in the system.";
+                    studentLessonByStudentDto.Message = Messages.LessonNotFound(existlesson.LessonDetailDto.Name);
                     return studentLessonByStudentDto; 
                 }
 
@@ -53,7 +53,7 @@ namespace StudentLessonApp.Persistence.Services
                 if (isLessonStudent is not null)
                 {
                     studentLessonByStudentDto.Success = false;
-                    studentLessonByStudentDto.Message = $"Student has already choosen Lesson with Name {existlesson.LessonDetailDto.Name}.";                  
+                    studentLessonByStudentDto.Message = Messages.StudentAlreadyChosenLesson(existlesson.LessonDetailDto.Name);                  
                     return studentLessonByStudentDto;
                 }
 
@@ -77,28 +77,20 @@ namespace StudentLessonApp.Persistence.Services
                 studentLessonDtos.Add(mappedStudentLesson);
 
             }
-       
-
             studentLessonByStudentDto.Success = true;
-            studentLessonByStudentDto.Message = "Lessons selected successfully.";
+            studentLessonByStudentDto.Message = Messages.LessonSelectedSuccess;
             studentLessonByStudentDto.StudentLessonsDto = studentLessonDtos;
             return studentLessonByStudentDto;
         }
 
         public async Task<List<LessonsBelongStudentDto?>> GetLessonsByStudentIdAsync(Guid studentId)
         {
-            var lessons = await _studentLessonReadRepository.GetWhere(x => x.StudentId == studentId).ToListAsync();
-            List<Lesson> lessonInfos = new List<Lesson>();
-
-            foreach (var lesson in lessons)
-            {
-                var lessonInfo = await _lessonReadRepository.GetByIdAsync(lesson.LessonId); ; ;
-                lessonInfos.Add(lessonInfo);
-            }
+            var studentLessons = await _studentLessonReadRepository.GetWhere(x => x.StudentId == studentId).ToListAsync();
+            var lessonIds = studentLessons.Select(sl => sl.LessonId);
+            var lessonInfos = await _lessonReadRepository.GetWhere(lesson => lessonIds.Contains(lesson.Id)).ToListAsync();
 
             var lessonsDto = _mapper.Map<List<LessonsBelongStudentDto>>(lessonInfos);
             return lessonsDto;
-
         }     
     }
 }

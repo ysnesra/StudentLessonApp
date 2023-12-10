@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using StudentLessonApp.Application.Abstractions.Services;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Persistence.Contexts;
@@ -12,8 +13,10 @@ namespace StudentLessonApp.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<StudentLessonAppDbContext>(options => { }, ServiceLifetime.Scoped);
-         
+            services.AddDbContext<StudentLessonAppDbContext>(options => {
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            }, ServiceLifetime.Scoped);
+
             services.AddHttpContextAccessor();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

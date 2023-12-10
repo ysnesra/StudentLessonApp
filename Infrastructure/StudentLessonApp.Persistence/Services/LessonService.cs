@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using StudentLessonApp.Application.Abstractions.Services;
+using StudentLessonApp.Application.Constants;
 using StudentLessonApp.Application.DTOs.Lesson;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Domain.Entities;
@@ -46,12 +47,12 @@ namespace StudentLessonApp.Persistence.Services
             if (lesson is null)
             {
                 lessonInfoDto.Success = false;
-                lessonInfoDto.Message = "Student information not found.";
+                lessonInfoDto.Message =Messages.StudentInfoNotFound;
                 return lessonInfoDto;
             }
 
             lessonInfoDto.Success = true;
-            lessonInfoDto.Message = "Student information displayed successfully.";
+            lessonInfoDto.Message = Messages.StudentInfoSuccess;
             lessonInfoDto.LessonDetailDto = _mapper.Map<LessonDetailDto>(lesson);
 
             return lessonInfoDto;

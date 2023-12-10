@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using StudentLessonApp.Application.Abstractions.Services;
+using StudentLessonApp.Application.Constants;
 using StudentLessonApp.Application.DTOs.Student;
-using StudentLessonApp.Application.Exceptions.Student;
 using StudentLessonApp.Application.Repositories;
 using StudentLessonApp.Domain.Entities;
 
@@ -43,7 +43,7 @@ namespace StudentLessonApp.Persistence.Services
                 var CheckDuplicateStudentDto = new
                 {
                     Success = false,
-                    Message = "This student userName is existed in the system. Please enter another userName."
+                    Message = Messages.StudentNameExisted
                 };
             }
             var studentDuplicateEmail = await _GetByEmailAsync(registerStudentDto.Email);
@@ -52,7 +52,7 @@ namespace StudentLessonApp.Persistence.Services
                 var CheckDuplicateStudentDto = new
                 {
                     Success = false,
-                    Message = "This student email is existed in the system. Please enter another email."
+                    Message = Messages.StudentEmailExisted
                 };
             }
             var studentDuplicatePhone = await _GetByPhoneAsync(registerStudentDto.Phone);
@@ -61,13 +61,13 @@ namespace StudentLessonApp.Persistence.Services
                 var CheckDuplicateStudentDto = new
                 {
                     Success = false,
-                    Message = "This student phone is existed in the system. Please enter another phone."
+                    Message = Messages.StudentPhoneExisted
                 };
             }
             return new CheckDuplicateStudentDto
             {
                 Success = true,
-                Message = "There is no other registered student in this information."
+                Message = Messages.StudentFirstRegistered
             };
 
         }
@@ -84,13 +84,13 @@ namespace StudentLessonApp.Persistence.Services
                 RegiterResponseDto regiterResponseDto = new RegiterResponseDto
                 {
                     Success = false,
-                    Message = "The student could not be registered."
+                    Message = Messages.StudentRegisteredFailed
                 };
             }
             return new RegiterResponseDto
             {
                 Success = true,
-                Message = "The student registered successfully.",
+                Message = Messages.StudentRegisteredSuccess,
                 Id = student.Id,
             };
         }
@@ -102,12 +102,12 @@ namespace StudentLessonApp.Persistence.Services
             if (student is null)
             {
                 profileInfoDto.Success = false;
-                profileInfoDto.Message = "Student information not found.";
+                profileInfoDto.Message = Messages.StudentInfoNotFound;
                 return profileInfoDto;
             }
 
             profileInfoDto.Success = true;
-            profileInfoDto.Message = "Student information displayed successfully.";
+            profileInfoDto.Message = Messages.StudentInfoSuccess;
             profileInfoDto.StudentInfoDto = _mapper.Map<StudentInfoDto>(student);
 
             return profileInfoDto;
@@ -121,19 +121,19 @@ namespace StudentLessonApp.Persistence.Services
             if (student is null)
             {
                 loginResponseDto.Success = false;
-                loginResponseDto.Message = "Student username not found.";
+                loginResponseDto.Message =Messages.StudentUsernameNotFound;
                 return loginResponseDto;
             }
 
             if (student.Password != loginStudentDto.Password)
             {
                 loginResponseDto.Success = false;
-                loginResponseDto.Message = "Password not match.";
+                loginResponseDto.Message = Messages.PasswordNotMatch;
                 return loginResponseDto;
             }
 
             loginResponseDto.Success = true;
-            loginResponseDto.Message = "Student has been successfully login. ";
+            loginResponseDto.Message = Messages.StudentLoginSuccess;
             loginResponseDto.StudentDto = _mapper.Map<StudentDto>(student);
 
             return loginResponseDto;
