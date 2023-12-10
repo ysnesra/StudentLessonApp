@@ -88,3 +88,6 @@ _Docker üzerinden oluşturuduğum Redis localhost'da 6380 portunda çalışıyo
 |  |  |
 
 
+Ders listesi redisden geliyor:
+
+![Ekran görüntüsü 2023-12-10 214620](https://github.com/ysnesra/StudentLessonApp/assets/104023688/e2790298-9b0b-418f-851c-d2e71ffe2c50)
