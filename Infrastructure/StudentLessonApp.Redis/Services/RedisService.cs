@@ -12,6 +12,7 @@ namespace StudentLessonApp.Redis.Services
             _connectionMultiplexer = ConnectionMultiplexer.Connect(url);
         }
 
+        // GetDb fonksiyonu Redisdeki hangi Db ye bağlanıyorsa onu getirir
         public IDatabase GetDb(int dbIndex)
         {
             return _connectionMultiplexer.GetDatabase(dbIndex);

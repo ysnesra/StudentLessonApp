@@ -19,7 +19,8 @@ namespace StudentLessonApp.Redis
                 return new RedisService(configuration["CacheOptions:Url"]);
             });
 
-            //RedisServicedeki default 15 db den 0.cı Db ye bağlanma
+            //RedisServicedeki default 15 db den; 0.cı Db ye bağlanma
+            //burada IDatabase üzerindende gidebilirsin
             services.AddSingleton<IDatabase>(sp =>
             {
                 var redisService = sp.GetRequiredService<RedisService>();

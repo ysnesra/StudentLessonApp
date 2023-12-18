@@ -10,5 +10,11 @@ namespace StudentLessonApp.Persistence.Repositories
         {
 
         }
+
+        public Task<ICollection<Lesson>> GetAllFromRedisAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+

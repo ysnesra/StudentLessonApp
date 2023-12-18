@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using StudentLessonApp.Application.Abstractions.Services;
+using StudentLessonApp.Application.Constants;
 using StudentLessonApp.Application.DTOs.Lesson;
 
 
@@ -25,13 +26,13 @@ namespace StudentLessonApp.Application.Features.Queries.Lesson.GetAllLesson
             if (lessons is null)
             {
                 lessonListWithMessageDto.Success = false;            
-                lessonListWithMessageDto.Message = "Lesson list not found.";
+                lessonListWithMessageDto.Message = Messages.LessonListNotFound;
                 lessonListWithMessageDto.LessonListDto = [];
                 return new GetAllLessonQueryResponse(lessonListWithMessageDto);
                 
             }
             lessonListWithMessageDto.Success = true;
-            lessonListWithMessageDto.Message = "Lesson listed succesfully.";
+            lessonListWithMessageDto.Message = Messages.LessonListedSuccess;
             lessonListWithMessageDto.LessonListDto = lessons;
             return new GetAllLessonQueryResponse(lessonListWithMessageDto);         
         }

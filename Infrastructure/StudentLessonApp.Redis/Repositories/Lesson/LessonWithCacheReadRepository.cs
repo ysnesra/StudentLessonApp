@@ -12,6 +12,7 @@ namespace StudentLessonApp.Redis.Repositories
 {
     public class LessonWithCacheReadRepository : ReadRepository<Lesson>, ILessonReadRepository
     {
+        //Tablonun Hash setine "lessonCaches" ismini verildi
         private const string lessonKey = "lessonCaches";
         private readonly ILessonReadRepository _lessonReadRepository;
         private readonly RedisService _redisService;
@@ -24,6 +25,7 @@ namespace StudentLessonApp.Redis.Repositories
             _cacheRepository = _redisService.GetDb(2);
         }
 
+        //Datayı Cacheleyecek
         private async Task<List<Lesson>> LoadToCacheFromDbAsync()
         {
             var lessons = await _lessonReadRepository.GetAll().ToListAsync();
@@ -38,7 +40,7 @@ namespace StudentLessonApp.Redis.Repositories
         
         public async Task<ICollection<Lesson>> GetAllFromRedisAsync()
         {
-            //data cache de yoksa
+            //data cache de yoksa db den cache yükler
             if(!await _cacheRepository.KeyExistsAsync(lessonKey))
                  return await LoadToCacheFromDbAsync();
 

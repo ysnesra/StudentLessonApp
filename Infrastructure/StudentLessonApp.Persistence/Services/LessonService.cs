@@ -32,8 +32,8 @@ namespace StudentLessonApp.Persistence.Services
 
         public async Task<ICollection<LessonListDto?>> GetAllLessonFromRedisAsync()
         {
-            var lessons = await _lessonReadRepository.GetAll().ToListAsync();
-            //var lessons = await _lessonReadRepository.GetAllFromRedisAsync();
+            //var lessons = await _lessonReadRepository.GetAll().ToListAsync();
+            var lessons = await _lessonReadRepository.GetAllFromRedisAsync();
 
             var lessonsDto = _mapper.Map<ICollection<LessonListDto>>(lessons);
 

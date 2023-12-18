@@ -9,7 +9,5 @@ namespace StudentLessonApp.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
 
-       // public virtual ICollection<Student> Students { get; set; }
-
     }
 }

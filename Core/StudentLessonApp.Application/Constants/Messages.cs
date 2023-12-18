@@ -5,8 +5,10 @@ namespace StudentLessonApp.Application.Constants
     public static class Messages
     {
         public static string StudentInfoNotFound = "Student information not found.";
+        public static string LessonListNotFound = "Lesson list not found.";
         public static string StudentInfoSuccess = "Student information displayed successfully.";
         public static string LessonSelectedSuccess = "Lessons selected successfully.";
+        public static string LessonListedSuccess = "Lessons listed successfully.";
         public static string StudentNameExisted = "This student userName is existed in the system. Please enter another userName.";
         public static string StudentEmailExisted = "This student email is existed in the system. Please enter another email.";
         public static string StudentPhoneExisted = "This student phone is existed in the system. Please enter another phone.";
