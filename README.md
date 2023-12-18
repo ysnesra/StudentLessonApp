@@ -8,14 +8,14 @@ Veritabanı olarak PostgreSQL ve ORM Toollarından EF Core , tasarım yaklaşım
 
 Verileri hızlı bir şekilde depolamak ve erişmek için Redis cache aracı kullanılmıştır.
 
-Proje Docker ortamında Distruburted olarak oluşturulmuştur.
+Proje Docker ortamında Distributed olarak oluşturulmuştur.
 
 
 Veritabanı işlemlerini soyutlama ve modülerleştirme için Repository Design Pattern tasarım deseni ve Bağımlılıkları yönetmek için Dependency Injection yapısı kullanılmıştır.
 
 Repository Pattern ile birlikte Dependency Injection kullanmak, bağımlılıkların yönetimini kolaylaştırır ve kodun daha esnek hale gelmesini sağlar.
 
-AutoMapper kütüphanesi kullanılırak farklı veri modeli arasında dönüşüm performanslı hale getirildi.
+AutoMapper kütüphanesi kullanılarak farklı veri modeli arasında dönüşüm performanslı hale getirildi.
 
 
 *****
@@ -88,3 +88,7 @@ _Docker üzerinden oluşturuduğum Redis localhost'da 6380 portunda çalışıyo
 |  |  |
 
 
+Ders listesi redisden geliyor:
+Cachede varsa cacheden gelir. Yoksa önce cachelenir sonra verileri cacheden getirir.
+
+![Ekran görüntüsü 2023-12-10 214620](https://github.com/ysnesra/StudentLessonApp/assets/104023688/e2790298-9b0b-418f-851c-d2e71ffe2c50)
